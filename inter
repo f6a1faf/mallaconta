@@ -1,0 +1,84 @@
+# Crear el archivo index.html con contenido básico agrupado por cuatrimestres
+html_content = """
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Interactiva - Contador UNLu</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background-color: #f9f9f9; }
+    h2 { background-color: #004080; color: white; padding: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #e0e0e0; }
+    tr.aprobada { background-color: #d4edda; text-decoration: line-through; }
+  </style>
+</head>
+<body>
+  <h1>Malla Interactiva - Contador Público (UNLu)</h1>
+  <p>Marcá las materias que ya aprobaste. Las correlativas se habilitarán automáticamente.</p>
+"""
+
+# Generar el contenido para cada cuatrimestre
+for cuatri, materias in cuatrimestres.items():
+    html_content += f"<h2>Cuatrimestre {cuatri}</h2>\n"
+    html_content += """<table>
+      <thead>
+        <tr>
+          <th>✔</th>
+          <th>Materia</th>
+          <th>Código</th>
+          <th>Correlativas</th>
+          <th>Hs. Sem.</th>
+          <th>Hs. Tot.</th>
+          <th>Habilitada</th>
+        </tr>
+      </thead>
+      <tbody>\n"""
+    for cod, nombre, correl, hs_sem, hs_tot in materias:
+        habilitada = "✅" if correl == "-" else "❌"
+        correl_clean = correl if correl != "-" else "Ninguna"
+        input_id = f"chk-{cod}"
+        estado_id = f"estado-{cod}"
+        row_id = f"row-{cod}"
+        # Formato para la fila
+        html_content += f"""
+        <tr id="{row_id}">
+          <td><input type="checkbox" id="{input_id}" {'disabled' if correl != '-' else ''} onchange="marcarAprobada('{cod}', '{correl}')"></td>
+          <td>{nombre}</td>
+          <td>{cod}</td>
+          <td>{correl_clean}</td>
+          <td>{hs_sem or ''}</td>
+          <td>{hs_tot or ''}</td>
+          <td id="{estado_id}">{habilitada}</td>
+        </tr>"""
+    html_content += "</tbody></table>\n"
+
+# Agregar el script JS para la lógica de desbloqueo
+html_content += """
+<script>
+function marcarAprobada(codigo, correlativas) {
+  document.getElementById("row-" + codigo).classList.add("aprobada");
+  const corr = correlativas.split(" - ");
+  document.querySelectorAll("input[type='checkbox']").forEach(chk => {
+    const id = chk.id.replace("chk-", "");
+    const fila = document.getElementById("row-" + id);
+    const estado = document.getElementById("estado-" + id);
+    const matCorrel = chk.getAttribute("onchange");
+    if (matCorrel && matCorrel.includes(codigo)) {
+      chk.disabled = false;
+      estado.innerText = "✅";
+    }
+  });
+}
+</script>
+</body>
+</html>
+"""
+
+# Guardar el archivo HTML
+html_path = "/mnt/data/index.html"
+with open(html_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+html_path
