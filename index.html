@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Malla Académica Interactiva</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  select {
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  th, td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #4a90e2;
+    color: white;
+  }
+  tr.hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<h1>Malla Académica - Técnico/a Universitario/a en Contabilidad</h1>
+
+<label for="filterCuat">Selecciona Cuatrimestre:</label>
+<select id="filterCuat" onchange="filterTable()">
+  <option value="todos">Todos</option>
+  <option value="I">I</option>
+  <option value="II">II</option>
+  <option value="III">III</option>
+  <option value="IV">IV</option>
+  <option value="V">V</option>
+  <option value="VI">VI</option>
+  <option value="VII">VII</option>
+  <option value="VIII">VIII</option>
+  <option value="IX">IX</option>
+  <option value="X">X</option>
+</select>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cuat.</th>
+      <th>Código</th>
+      <th>Actividad Académica</th>
+      <th>Correlatividad</th>
+      <th>Hs. Sem.</th>
+      <th>Hs. Tot.</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<!-- Cuatrimestre I -->
+<tr data-cuat="I"><td>I</td><td>21010</td><td>Taller de Lectura y Comprensión de Textos (2)</td><td>-</td><td>12</td><td>48</td></tr>
+<tr data-cuat="I"><td>I</td><td>24201</td><td>Introducción a la Contabilidad</td><td>-</td><td>4</td><td>64</td></tr>
+<tr data-cuat="I"><td>I</td><td>14025</td><td>Introducción a la Matemática</td><td>-</td><td>4</td><td>64</td></tr>
+<tr data-cuat="I"><td>I</td><td>20102</td><td>Introducción a la Administración</td><td>-</td><td>4</td><td>64</td></tr>
+<tr data-cuat="I"><td>I</td><td>20011</td><td>Análisis Socioeconómico</td><td>-</td><td>4</td><td>64</td></tr>
+
+<!-- Cuatrimestre II -->
+<tr data-cuat="II"><td>II</td><td>24202</td><td>Contabilidad Básica</td><td>24201</td><td>6</td><td>96</td></tr>
+<tr data-cuat="II"><td>II</td><td>24203</td><td>Administración</td><td>20102</td><td>4</td><td>64</td></tr>
+<tr data-cuat="II"><td>II</td><td>24204</td><td>Derecho Privado</td><td>-</td><td>4</td><td>64</td></tr>
+<tr data-cuat="II"><td>II</td><td>20038</td><td>Estudio de la Const. Nac. y los Derechos Humanos</td><td>-</td><td>4</td><td>64</td></tr>
+
+<!-- Cuatrimestre III -->
+<tr data-cuat="III"><td>III</td><td>24205</td><td>Contabilidad Intermedia</td><td>24202</td><td>6</td><td>96</td></tr>
+<tr data-cuat="III"><td>III</td><td>10025</td><td>Matemática I</td><td>14025</td><td>6</td><td>96</td></tr>
+<tr data-cuat="III"><td>III</td><td>24206</td><td>Metodología de la Investigación</td><td>21010 - 24203</td><td>4</td><td>64</td></tr>
+<tr data-cuat="III"><td>III</td><td>24207</td><td>Derecho Comercial</td><td>24204</td><td>4</td><td>64</td></tr>
+
+<!-- Cuatrimestre IV -->
+<tr data-cuat="IV"><td>IV</td><td>20054</td><td>Análisis de Estados Contables</td><td>24205</td><td>6</td><td>96</td></tr>
+<tr data-cuat="IV"><td>IV</td><td>10026</td><td>Matemática II</td><td>10025</td><td>6</td><td>96</td></tr>
+<tr data-cuat="IV"><td>IV</td><td>24208</td><td>Entidades Financieras y de Seguros</td><td>24205 - 24203</td><td>6</td><td>96</td></tr>
+<tr data-cuat="IV"><td>IV</td><td>24209</td><td>Derecho Administrativo</td><td>20038 - 24207</td><td>4</td><td>64</td></tr>
+
+<!-- Cuatrimestre V -->
+<tr data-cuat="V"><td>V</td><td>24210</td><td>Contabilidad de Costos</td><td>24205</td><td>4</td><td>64</td></tr>
+<tr data-cuat="V"><td>V</td><td>10091</td><td>Estadística</td><td>10026</td><td>6</td><td>96</td></tr>
+<tr data-cuat="V"><td>V</td><td>20067</td><td>Economía I</td><td>20011 - 24203</td><td>6</td><td>96</td></tr>
+<tr data-cuat="V"><td>V</td><td>10027</td><td>Matemática Financiera</td><td>10026</td><td>4</td><td>64</td></tr>
+<tr data-cuat="V"><td>V</td><td>24211</td><td>Derecho del Trabajo</td><td>24209</td><td>4</td><td>64</td></tr>
+
+<!-- Cuatrimestre VI -->
+<tr data-cuat="VI"><td>VI</td><td>24212</td><td>Costos de Gestión</td><td>24210</td><td>4</td><td>64</td></tr>
+<tr data-cuat="VI"><td>VI</td><td>20068</td><td>Economía II</td><td>10091 - 20067</td><td>6</td><td>96</td></tr>
+<tr data-cuat="VI"><td>VI</td><td>24213</td><td>Administración de Recursos Humanos</td><td>24203 - 24211</td><td>4</td><td>64</td></tr>
+<tr data-cuat="VI"><td>VI</td><td>24214</td><td>Fundamentos de Marketing</td><td>20067 - 24210</td><td>4</td><td>64</td></tr>
+<tr data-cuat="VI"><td>VI</td><td>24215</td><td>Gestión de las Operaciones</td><td>10091</td><td>4</td><td>64</td></tr>
+<tr data-cuat="VI"><td>VI</td><td>24216</td><td>Taller de Práctica Laboral</td><td>24203 - 24211</td><td>4</td><td>64</td></tr>
+<tr data-cuat="VI"><td>VI</td><td>39540</td><td>Competencias Básicas en Idioma (3)</td><td>24202--</td><td>-</td><td>-</td></tr>
+<tr data-cuat="VI"><td>VI</td><td>19054</td><td>Competencias Básicas en Informática (3)</td><td>10025--</td><td>-</td><td>-</td></tr>
+
+<!-- Cuatrimestre VII -->
+<tr data-cuat="VII"><td>VII</td><td>21239</td><td>Contabilidad Superior</td><td>20054 - 24208 - 39540 - 19054</td><td>6</td><td>96</td></tr>
+<tr data-cuat="VII"><td>VII</td><td>20058</td><td>Administración Económico Financiera</td><td>10027 - 24212 - 24215 - 39540 - 19054</td><td>6</td><td>96</td></tr>
+<tr data-cuat="VII"><td>VII</td><td>24217</td><td>Derecho Societario y Concursal</td><td>20054 - 24211 - 39540 - 19054</td><td>6</td><td>96</td></tr>
+<tr data-cuat="VII"><td>VII</td><td>24218</td><td>Tributación I</td><td>20054 - 24209 - 24212 - 39540 - 19054</td><td>6</td><td>96</td></tr>
+
+<!-- Cuatrimestre VIII -->
+<tr data-cuat="VIII"><td>VIII</td><td>20120</td><td>Auditoría I</td><td>21239</td><td>6</td><td>96</td></tr>
+<tr data-cuat="VIII"><td>VIII</td><td>24219</td><td>Cooperativas, Mutuales y Organizaciones No Gubernamentales</td><td>20054 - 24217</td><td>4</td><td>64</td></tr>
+<tr data-cuat="VIII"><td>VIII</td><td>24220</td><td>Taller de Sistemas de Gestión Contable</td><td>20054 - 24217</td><td>4</td><td>64</td></tr>
+<tr data-cuat="VIII"><td>VIII</td><td>24221</td><td>Tributación II</td><td>24218</td><td>6</td><td>96</td></tr>
+
+<!-- Cuatrimestre IX -->
+<tr data-cuat="IX"><td>IX</td><td>20121</td><td>Auditoría II</td><td>20120</td><td>6</td><td>96</td></tr>
+<tr data-cuat="IX"><td>IX</td><td>24222</td><td>Tributación III</td><td>24221</td><td>6</td><td>96</td></tr>
+<tr data-cuat="IX"><td>IX</td><td>21145</td><td>Taller de Práctica Profesional Contador Público (Anual)</td><td>21239 - 20120 - 24219 - 24221 - 24217</td><td>4</td><td>64</td></tr>
+
+<!-- Cuatrimestre X -->
+<tr data-cuat="X"><td>X</td><td>20035</td><td>Contabilidad Pública</td><td>21239 - 24209</td><td>6</td><td>96</td></tr>
+<tr data-cuat="X"><td>X</td><td>24223</td><td>Taller de Liquidación de Impuestos</td><td>24222</td><td>6</td><td>96</td></tr>
+<tr data-cuat="X"><td>X</td><td>21145</td><td>Taller de Práctica Profesional Contador Público (Continuación)</td><td>21239 - 20120 - 24219 - 24221 - 24217</td><td>4</td><td>64</td></tr>
+
+  </tbody>
+</table>
+
+<script>
+  function filterTable() {
+    const filter = document.getElementById('filterCuat').value;
+    const rows = document.querySelectorAll('tbody tr');
+
+    rows.forEach(row => {
+      if (filter === 'todos') {
+        row.classList.remove('hidden');
+      } else {
+        if (row.dataset.cuat === filter) {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
